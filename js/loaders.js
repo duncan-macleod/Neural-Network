@@ -1,6 +1,7 @@
 // Assets & Loaders --------------------------------------------------------
 import * as THREE from 'three';
 import _ from 'lodash';
+import ELECTRIC from './electric.png';
 class LoadingManager {
 	constructor() {
 		this.loadingManager = new THREE.LoadingManager();
@@ -40,8 +41,10 @@ class LoadingManager {
 		} );
 
 		this.TEXTURES = {};
+		console.log(ELECTRIC);
 		var textureLoader = new THREE.TextureLoader( this.loadingManager );
-		textureLoader.load( 'sprites/electric.png', ( tex ) => {
+		this.TEXTURES.electric = textureLoader.load(ELECTRIC, ( tex ) => {
+			console.log('done', tex);
 			this.TEXTURES.electric = tex;
 		} );
 	}
