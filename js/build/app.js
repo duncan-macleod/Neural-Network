@@ -1,3 +1,6 @@
+import * as THREE from 'three';
+import OrbitControls from 'orbit-controls-es6';
+import OBJLoader from 'three-obj-loader';
 // Neuron ----------------------------------------------------------------
 
 function Neuron( x, y, z ) {
@@ -421,7 +424,7 @@ NeuralNetwork.prototype.initNeurons = function ( inputVertices ) {
 
 
 	// neuron mesh
-	this.neuronParticles = new THREE.PointCloud( this.neuronsGeom, this.neuronShaderMaterial );
+	this.neuronParticles = new THREE.Points( this.neuronsGeom, this.neuronShaderMaterial );
 	this.meshComponents.add( this.neuronParticles );
 
 	this.neuronShaderMaterial.needsUpdate = true;
@@ -474,7 +477,7 @@ NeuralNetwork.prototype.initAxons = function () {
 
 
 	var numNotConnected = 0;
-	for ( i = 0; i < allNeuronsLength; i++ ) {
+	for (let i = 0; i < allNeuronsLength; i++ ) {
 		if ( !this.components.neurons[ i ].connection[ 0 ] ) {
 			numNotConnected += 1;
 		}
@@ -577,7 +580,7 @@ NeuralNetwork.prototype.resetAllNeurons = function () {
 
 	this.numPassive = 0;
 	for ( var ii = 0; ii < this.components.neurons.length; ii++ ) { // reset all neuron state
-		n = this.components.neurons[ ii ];
+		let n = this.components.neurons[ ii ];
 
 		if ( !n.fired ) {
 			this.numPassive += 1;
@@ -600,7 +603,7 @@ NeuralNetwork.prototype.updateSettings = function () {
 
 	this.neuronUniforms.opacity.value = this.neuronOpacity;
 
-	for ( i = 0; i < this.components.neurons.length; i++ ) {
+	for (let i = 0; i < this.components.neurons.length; i++ ) {
 		this.neuronAttributes.color.value[ i ].setStyle( this.neuronColor ); // initial neuron color
 	}
 	this.neuronAttributes.color.needsUpdate = true;
@@ -649,12 +652,9 @@ shaderLoader.setResponseType( 'text' );
 
 shaderLoader.loadMultiple = function ( SHADER_CONTAINER, urlObj ) {
 
-	_.each( urlObj, function ( value, key ) {
-
-		shaderLoader.load( value, function ( shader ) {
-
+	Object.keys(urlObj).forEach(function (key ) {
+		shaderLoader.load( urlObj[key], function ( shader ) {
 			SHADER_CONTAINER[ key ] = shader;
-
 		} );
 
 	} );
@@ -675,7 +675,7 @@ shaderLoader.loadMultiple( SHADER_CONTAINER, {
 
 
 var OBJ_MODELS = {};
-var OBJloader = new THREE.OBJLoader( loadingManager );
+var OBJloader = new OBJLoader( loadingManager );
 OBJloader.load( 'models/brain_vertex_low.obj', function ( model ) {
 
 	OBJ_MODELS.brain = model.children[ 0 ];
@@ -724,7 +724,7 @@ scene = new THREE.Scene();
 // ---- Camera
 camera = new THREE.PerspectiveCamera( 75, screenRatio, 10, 5000 );
 // camera orbit control
-cameraCtrl = new THREE.OrbitControls( camera, container );
+cameraCtrl = new OrbitControls( camera, container );
 cameraCtrl.object.position.y = 150;
 cameraCtrl.update();
 
@@ -796,7 +796,6 @@ function main() {
 /* exported iniGui, updateGuiInfo */
 
 function initGui() {
-
 	gui = new dat.GUI();
 	gui.width = 270;
 
@@ -920,4 +919,14 @@ function onWindowResize() {
 	renderer.setSize( WIDTH, HEIGHT );
 	renderer.setPixelRatio( pixelRatio );
 
+}
+
+export {
+	Neuron,
+	Signal,
+	ParticlePool,
+	Particle,
+	Axon,
+	Connection,
+	NeuralNetwork,
 }

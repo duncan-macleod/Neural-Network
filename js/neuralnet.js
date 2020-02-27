@@ -1,5 +1,6 @@
 // Neural Network --------------------------------------------------------
-
+import * as THREE from 'three';
+import ParticlePool from './particlePool';
 function NeuralNetwork() {
 
 	this.initialized = false;
@@ -355,3 +356,5 @@ NeuralNetwork.prototype.testChangOpcAttr = function () {
 	}
 	this.axonGeom.attributes.opacity.needsUpdate = true;
 };
+
+export default NeuralNetwork;

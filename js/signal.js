@@ -1,5 +1,5 @@
 // Signal extends THREE.Vector3 ----------------------------------------------------------------
-
+import * as THREE from 'three';
 function Signal( particlePool, minSpeed, maxSpeed ) {
 
 	this.minSpeed = minSpeed;
@@ -53,3 +53,5 @@ Signal.prototype.travel = function ( deltaTime ) {
 	this.particle.set( pos.x, pos.y, pos.z );
 
 };
+
+export default Signal;

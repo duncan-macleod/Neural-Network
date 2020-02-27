@@ -26,3 +26,5 @@ function run() {
 	FRAME_COUNT ++;
 
 }
+
+export default run;

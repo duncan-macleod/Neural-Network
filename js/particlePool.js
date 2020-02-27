@@ -1,8 +1,10 @@
 // Particle Pool ---------------------------------------------------------
-
+import * as THREE from 'three';
+import Particle from './particle';
+import Loader from './loaders';
 function ParticlePool( poolSize ) {
 
-	this.spriteTextureSignal = TEXTURES.electric;
+	this.spriteTextureSignal = Loader.TEXTURES.electric;
 
 	this.poolSize = poolSize;
 	this.pGeom = new THREE.Geometry();
@@ -83,3 +85,5 @@ ParticlePool.prototype.updateSettings = function () {
 	this.pMat_outer.size = this.pSize * 10;
 
 };
+
+export default ParticlePool;

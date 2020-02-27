@@ -1,5 +1,6 @@
 // Axon extends THREE.CubicBezierCurve3 ------------------------------------------------------------------
 /* exported Axon, Connection */
+import * as THREE from 'three';
 
 function Axon( neuronA, neuronB ) {
 
@@ -46,4 +47,9 @@ Axon.prototype.getControlPoint = function ( v1, v2 ) {
 function Connection( axon, startingPoint ) {
 	this.axon = axon;
 	this.startingPoint = startingPoint;
+}
+
+export {
+	Axon,
+	Connection,
 }

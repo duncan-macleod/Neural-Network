@@ -1,5 +1,6 @@
 // Particle --------------------------------------------------------------
 // Private class for particle pool
+import * as THREE from 'three';
 
 function Particle( particlePool ) {
 
@@ -17,3 +18,5 @@ Particle.prototype.free = function () {
 	this.set( this.particlePool.offScreenPos.x, this.particlePool.offScreenPos.y, this.particlePool.offScreenPos.z );
 
 };
+
+export default Particle;

@@ -1,3 +1,6 @@
+import * as THREE from 'three';
+import { Axon, Connection } from './axon';
+import Signal from './signal';
 // Neuron ----------------------------------------------------------------
 
 function Neuron( x, y, z ) {
@@ -53,3 +56,5 @@ Neuron.prototype.reset = function () {
 	this.firedCount = 0;
 
 };
+
+export default Neuron;

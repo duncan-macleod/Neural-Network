@@ -1,5 +1,8 @@
 // Scene --------------------------------------------------------
 /* exported updateHelpers */
+import * as THREE from 'three';
+import OrbitControls from 'orbit-controls-es6';
+import Detector from './detector';
 
 if ( !Detector.webgl ) {
 	Detector.addGetWebGLMessage();
@@ -31,7 +34,7 @@ scene = new THREE.Scene();
 // ---- Camera
 camera = new THREE.PerspectiveCamera( 75, screenRatio, 10, 5000 );
 // camera orbit control
-cameraCtrl = new THREE.OrbitControls( camera, container );
+cameraCtrl = new OrbitControls( camera, container );
 cameraCtrl.object.position.y = 150;
 cameraCtrl.update();
 
@@ -47,8 +50,8 @@ renderer.autoClear = false;
 container.appendChild( renderer.domElement );
 
 // ---- Stats
-stats = new Stats();
-container.appendChild( stats.domElement );
+// stats = new Stats();
+// container.appendChild( stats.domElement );
 
 // ---- grid & axis helper
 var gridHelper = new THREE.GridHelper( 600, 50 );
@@ -82,3 +85,5 @@ scene.add( light );
 light = new THREE.AmbientLight( 0x111111 );
 scene.add( light );
 */
+
+export default scene;
