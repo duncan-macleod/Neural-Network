@@ -187,9 +187,9 @@ NeuralNetwork.prototype.initAxons = function () {
 	var axonPositions = new Float32Array( this.axonPositions );
 	var axonOpacities = new Float32Array( this.axonAttributes.opacity.value );
 
-	this.axonGeom.addAttribute( 'index', new THREE.BufferAttribute( axonIndices, 1 ) );
-	this.axonGeom.addAttribute( 'position', new THREE.BufferAttribute( axonPositions, 3 ) );
-	this.axonGeom.addAttribute( 'opacity', new THREE.BufferAttribute( axonOpacities, 1 ) );
+	this.axonGeom.setAttribute( 'index', new THREE.BufferAttribute( axonIndices, 1 ) );
+	this.axonGeom.setAttribute( 'position', new THREE.BufferAttribute( axonPositions, 3 ) );
+	this.axonGeom.setAttribute( 'opacity', new THREE.BufferAttribute( axonOpacities, 1 ) );
 	this.axonGeom.computeBoundingSphere();
 
 	this.axonShaderMaterial = new THREE.ShaderMaterial( {

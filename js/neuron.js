@@ -37,11 +37,11 @@ Neuron.prototype.createSignal = function ( particlePool, minSpeed, maxSpeed ) {
 	var signals = [];
 	// create signal to all connected axons
 	for ( var i = 0; i < this.connection.length; i++ ) {
-		if ( this.connection[ i ].axon !== this.prevReleaseAxon ) {
+		// if ( this.connection[ i ].axon !== this.prevReleaseAxon ) {
 			var c = new Signal( particlePool, minSpeed, maxSpeed );
 			c.setConnection( this.connection[ i ] );
 			signals.push( c );
-		}
+		// }
 	}
 	return signals;
 

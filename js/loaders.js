@@ -2,12 +2,17 @@
 import * as THREE from 'three';
 import _ from 'lodash';
 import ELECTRIC from './electric.png';
+import NeuronVert from '../shaders/neuron.vert';
+import NeuronFrag from '../shaders/neuron.frag';
+import AxonVert from '../shaders/axon.vert';
+import AxonFrag from '../shaders/axon.frag';
 class LoadingManager {
 	constructor() {
 		this.loadingManager = new THREE.LoadingManager();
 		this.loadingManager.onLoad = () => {
 			// document.getElementById( 'loading' ).style.display = 'none'; // hide loading animation when finished
 			console.log( 'Done.' );
+			this.done = true;
 		};
 
 
@@ -28,17 +33,17 @@ class LoadingManager {
 
 		this.SHADER_CONTAINER = {};
 		this.shaderLoader.loadMultiple( this.SHADER_CONTAINER, {
-			neuronVert: 'shaders/neuron.vert',
-			neuronFrag: 'shaders/neuron.frag',
-			axonVert: 'shaders/axon.vert',
-			axonFrag: 'shaders/axon.frag'
+			neuronVert: NeuronVert,
+			neuronFrag: NeuronFrag,
+			axonVert: AxonVert,
+			axonFrag: AxonFrag,
 		} );
 
-		this.OBJ_MODELS = {};
-		var OBJloader = new THREE.ObjectLoader( this.loadingManager );
-		OBJloader.load( 'models/brain_vertex_low.obj', ( model ) => {
-			this.OBJ_MODELS.brain = model.children[ 0 ];
-		} );
+		// this.OBJ_MODELS = {};
+		// var OBJloader = new THREE.ObjectLoader( this.loadingManager );
+		// OBJloader.load( 'models/brain_vertex_low.obj', ( model ) => {
+		// 	this.OBJ_MODELS.brain = model.children[ 0 ];
+		// } );
 
 		this.TEXTURES = {};
 		console.log(ELECTRIC);
