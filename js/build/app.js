@@ -759,26 +759,6 @@ function updateHelpers() {
 	gridHelper.visible = sceneSettings.enableGridHelper;
 }
 
-/*
-// ---- Lights
-// back light
-light = new THREE.DirectionalLight( 0xffffff, 0.8 );
-light.position.set( 100, 230, -100 );
-scene.add( light );
-
-// hemi
-light = new THREE.HemisphereLight( 0x00ffff, 0x29295e, 1 );
-light.position.set( 370, 200, 20 );
-scene.add( light );
-
-// ambient
-light = new THREE.AmbientLight( 0x111111 );
-scene.add( light );
-*/
-
-// Main --------------------------------------------------------
-/* exported main, updateGuiInfo */
-
 var gui, gui_info, gui_settings;
 
 function main() {

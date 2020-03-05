@@ -3,7 +3,7 @@ import { Axon, Connection } from './axon';
 import Signal from './signal';
 // Neuron ----------------------------------------------------------------
 
-function Neuron( x, y, z ) {
+function Neuron( x, y, z, data ) {
 
 	this.connection = [];
 	this.receivedSignal = false;
@@ -13,6 +13,7 @@ function Neuron( x, y, z ) {
 	this.firedCount = 0;
 	this.prevReleaseAxon = null;
 	THREE.Vector3.call( this, x, y, z );
+	this.neuronInfo = {...data};
 
 }
 
