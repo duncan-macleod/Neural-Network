@@ -3,7 +3,7 @@ import { Axon, Connection } from './axon';
 import Signal from './signal';
 // Neuron ----------------------------------------------------------------
 
-function Neuron( x, y, z, data ) {
+function Neuron( x, y, z, data, sprite, target = 2 ) {
 
 	this.connection = [];
 	this.receivedSignal = false;
@@ -14,13 +14,21 @@ function Neuron( x, y, z, data ) {
 	this.prevReleaseAxon = null;
 	THREE.Vector3.call( this, x, y, z );
 	this.neuronInfo = {...data};
+	this.sprite = sprite;
+	if (sprite) {
+		this.spawnAnimate();
+	}
+	this.currentScale = 0;
+	this.target = target;
+
+	this.spawnFrames = 30;
+	this.scalePerFrame = this.target / this.spawnFrames;
 
 }
 
 Neuron.prototype = Object.create( THREE.Vector3.prototype );
 
 Neuron.prototype.connectNeuronTo = function ( neuronB ) {
-
 	var neuronA = this;
 	// create axon and establish connection
 	var axon = new Axon( neuronA, neuronB );
@@ -47,6 +55,15 @@ Neuron.prototype.createSignal = function ( particlePool, minSpeed, maxSpeed ) {
 	return signals;
 
 };
+
+Neuron.prototype.spawnAnimate = function () {
+	if (this.currentScale >= this.target) {
+		return;
+	}
+	this.sprite.scale.set(this.currentScale, this.currentScale, this.currentScale);
+	this.currentScale += this.scalePerFrame;
+	setTimeout(() => this.spawnAnimate(), 0);
+}
 
 Neuron.prototype.reset = function () {
 

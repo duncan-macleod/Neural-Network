@@ -10,7 +10,7 @@ function Axon( neuronA, neuronB ) {
 	this.cpLength = neuronA.distanceTo( neuronB ) / THREE.Math.randFloat( 1.5, 4.0 );
 	this.controlPointA = this.getControlPoint( neuronA, neuronB );
 	this.controlPointB = this.getControlPoint( neuronB, neuronA );
-	THREE.CubicBezierCurve3.call( this, this.neuronA, this.controlPointA, this.controlPointB, this.neuronB );
+	THREE.CubicBezierCurve3.call(this, this.neuronA, this.neuronA, this.neuronB, this.neuronB );
 
 	this.vertices = this.getSubdividedVertices();
 
