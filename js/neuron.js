@@ -3,7 +3,7 @@ import { Axon, Connection } from './axon';
 import Signal from './signal';
 // Neuron ----------------------------------------------------------------
 
-function Neuron( x, y, z, data, sprite, target = 2 ) {
+function Neuron( x, y, z, data, sprite, targetScale = 2 ) {
 
 	this.connection = [];
 	this.receivedSignal = false;
@@ -19,10 +19,11 @@ function Neuron( x, y, z, data, sprite, target = 2 ) {
 		this.spawnAnimate();
 	}
 	this.currentScale = 0;
-	this.target = target;
+	this.targetScale = targetScale;
+	this.defaultScale = targetScale;
 
-	this.spawnFrames = 30;
-	this.scalePerFrame = this.target / this.spawnFrames;
+	this.spawnFrames = 15;
+	this.scalePerFrame = this.targetScale / this.spawnFrames;
 
 }
 
@@ -56,21 +57,51 @@ Neuron.prototype.createSignal = function ( particlePool, minSpeed, maxSpeed ) {
 
 };
 
-Neuron.prototype.spawnAnimate = function () {
-	if (this.currentScale >= this.target) {
-		return;
+Neuron.prototype.spawnAnimate = function (direction = 1) {
+	if (direction > 0) {
+		if (this.currentScale >= this.targetScale) {
+			return;
+		}
+		this.currentScale += this.scalePerFrame;
+	} else {
+		if (this.currentScale <= this.targetScale) {
+			return;
+		}
+		this.currentScale -= this.scalePerFrame;
 	}
+
 	this.sprite.scale.set(this.currentScale, this.currentScale, this.currentScale);
-	this.currentScale += this.scalePerFrame;
-	setTimeout(() => this.spawnAnimate(), 0);
+
+	setTimeout(() => this.spawnAnimate(direction), 0);
+}
+
+Neuron.prototype.resetScale = function () {
+	this.focused = false;
+	this.targetScale = this.defaultScale;
+	this.currentScale = this.defaultScale;
+	if (this.sprite.scale.x !== this.targetScale) {
+		this.spawnAnimate(this.targetScale > this.sprite.scale.x ? -1 : 1);
+	}
+	this.sprite.scale.set(this.defaultScale, this.defaultScale, this.defaultScale);
+}
+
+Neuron.prototype.onClick = function () {
+	this.focused = true;
+	this.setScale(this.defaultScale);
+}
+
+Neuron.prototype.setScale = function (scale) {
+	const direction = this.targetScale >= scale ? -1 : 1;
+	this.targetScale = scale;
+	this.spawnAnimate(direction);
 }
 
 Neuron.prototype.reset = function () {
-
 	this.receivedSignal = false;
 	this.lastSignalRelease = 0;
 	this.releaseDelay = 0;
 	this.fired = false;
+	this.focused = false;
 	this.firedCount = 0;
 
 };

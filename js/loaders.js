@@ -1,7 +1,7 @@
 // Assets & Loaders --------------------------------------------------------
 import * as THREE from 'three';
 import _ from 'lodash';
-import ELECTRIC from './electric.png';
+import NODE_PNG from './node.png';
 import NeuronVert from '../shaders/neuron.vert';
 import NeuronFrag from '../shaders/neuron.frag';
 import AxonVert from '../shaders/axon.vert';
@@ -46,11 +46,11 @@ class LoadingManager {
 		// } );
 
 		this.TEXTURES = {};
-		console.log(ELECTRIC);
+		console.log(NODE_PNG);
 		var textureLoader = new THREE.TextureLoader( this.loadingManager );
-		this.TEXTURES.electric = textureLoader.load(ELECTRIC, ( tex ) => {
+		this.TEXTURES.node = textureLoader.load(NODE_PNG, ( tex ) => {
 			console.log('done', tex);
-			this.TEXTURES.electric = tex;
+			this.TEXTURES.NODE_PNG = tex;
 		} );
 	}
 }

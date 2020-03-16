@@ -4,7 +4,7 @@ import Particle from './particle';
 import Loader from './loaders';
 function ParticlePool( poolSize ) {
 
-	this.spriteTextureSignal = Loader.TEXTURES.electric;
+	this.spriteTextureSignal = Loader.TEXTURES.node;
 
 	this.poolSize = poolSize;
 	this.pGeom = new THREE.Geometry();
